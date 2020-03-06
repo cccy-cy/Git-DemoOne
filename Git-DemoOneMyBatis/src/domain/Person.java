@@ -1,5 +1,6 @@
 package domain;
-
+//一端Person
+//一端Idcard
 public class Person {
     //pid name gender age
 

@@ -1,5 +1,6 @@
 package domain;
-
+//一端Idcard
+//一端Person
 public class Idcard {
     //cid number city Person
     private Integer cid;

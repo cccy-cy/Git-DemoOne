@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--一对多的Mapper 一端是teacher 多段是student-->
+<mapper namespace = "dao.StudentDao">
+
+    <resultMap id = "TeacherForStudent" type="domain.Teacher">
+        <id property = "tid" column = "tid"></id>
+        <result property = "tname" column = "tname"></result>
+        <result property = "tage" column = "tage"></result>
+        <result property = "subject" column = "subject"></result>
+        <collection property = "studentList" javaType = "list" ofType = "domain.Student">
+            <id property="sid" column="sid"></id>
+            <result property="sname" column="sname"></result>
+            <result property="sage" column="sage"></result>
+            <result property="gender" column="gender"></result>
+            <result property="tid" column="tid"></result>
+        </collection>
+    </resultMap>
+
+<!--    <select id = "selectStudentList" resultType = "domain.Student">-->
+<!--        select sid, sname, sage, gender, tid from student where tid = #{tid}-->
+<!--    </select>-->
+
+    <select id = "selectTeacherOne" resultMap = "TeacherForStudent">
+        select t.tid, t.tname, t.tage, t.subject, s.sid, s.sname, s.sage, s.gender, s.tid from teacher t inner join student s on t.tid = s.tid where t.tid = #{tid}
+    </select>
+
+</mapper>

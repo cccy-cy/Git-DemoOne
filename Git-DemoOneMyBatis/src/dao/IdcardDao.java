@@ -4,7 +4,7 @@ import domain.Idcard;
 import domain.Person;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.mapping.FetchType;
-
+//一对一的dao  两端分别是idcard and person
 public interface IdcardDao {
 
 
