@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.IdcardDao">
+
+    <resultMap id="IdcardForPerson" type="domain.Idcard">
+        <id property="cid" column="cid"></id>
+        <result property="number" column="number"></result>
+        <result property="city" column="city"></result>
+        <association property="person" column="pid" javaType="domain.Person" select="selectPersonOne"></association>
+    </resultMap>
+
+    <select id="selectPersonOne" resultType="domain.Person">
+        select pid, name, gender, age from person where pid = #{pid}
+    </select>
+
+    <select id="selectOne" resultMap="IdcardForPerson">
+        select cid, number, city, pid from idcard where cid = #{cid}
+    </select>
+</mapper>
