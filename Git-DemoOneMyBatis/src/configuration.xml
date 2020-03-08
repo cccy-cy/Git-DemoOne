@@ -8,7 +8,7 @@
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost:3306/onetomany?serverTimezone=CST&amp;characterEncoding=UTF-8&amp;useSSL=false"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/onetoone?serverTimezone=CST&amp;characterEncoding=UTF-8&amp;useSSL=false"/>
                 <property name="username" value="root"/>
                 <property name="password" value="0000"/>
             </dataSource>
@@ -17,10 +17,14 @@
     <mappers>
 <!--        一对一的（person-idcard）mapper文件和注解-->
 <!--        <mapper resource="mapper/IdcardMapper.xml"/>-->
-<!--        <mapper class="dao.IdcardDao"/>-->
+        <mapper class="dao.IdcardDao"/>
 
 <!--        一对多的（teacher-student）mapper文件和注解-->
 <!--        <mapper resource = "mapper/StudentMapper.xml"></mapper>-->
-        <mapper class = "dao.StudentDao"></mapper>
+<!--        <mapper class = "dao.StudentDao"></mapper>-->
+
+<!--        多对多的（manyTeacher-manyStudent）mapper文件和注解-->
+<!--        <mapper resource = "mapper/ManyTeacherMapper.xml"></mapper>-->
+<!--        <mapper class = "dao.ManyTeacherDao"></mapper>-->
     </mappers>
 </configuration>

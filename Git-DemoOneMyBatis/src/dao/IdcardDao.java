@@ -2,8 +2,12 @@ package dao;
 
 import domain.Idcard;
 import domain.Person;
+import dynamic.PersonDynamic;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.mapping.FetchType;
+
+import java.util.List;
+
 //一对一的dao  两端分别是idcard and person
 public interface IdcardDao {
 
@@ -18,8 +22,18 @@ public interface IdcardDao {
                 @Result(property = "person", column = "pid", javaType = Person.class, one = @One(select = "idcardForPerson", fetchType = FetchType.LAZY))
             }
     )
-    public Idcard selectOne(@Param("cid") Integer cid);
+    public Idcard selectOneIdcard(@Param("cid") Integer cid);
 
     @Select("select pid, name, gender, age from person where pid = #{pid}")
     public Person idcardForPerson(@Param("pid") Integer pid);
+
+//    =======================================================
+
+//    动态sql
+    @SelectProvider(type = PersonDynamic.class, method = "dynamic")
+    public Person selectPerson(@Param("pid") Integer pid, @Param("name")String name);
+
+//    动态sql in(pid,pid,pid);
+    @SelectProvider(type = PersonDynamic.class, method = "dynamicTwo")
+    public List<Person> selectPersonTwo(@Param("pids")Integer...pids);
 }

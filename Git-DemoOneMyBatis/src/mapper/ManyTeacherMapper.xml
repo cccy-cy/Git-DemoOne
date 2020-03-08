@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 多对多的Mapper ManyTeacher and ManyStudent-->
+<mapper namespace="dao.ManyTeacherDao">
+
+<!--    第一种方式-->
+<!--    <resultMap id = "ManyTeacherForManyStudent" type = "domain.ManyTeacher">-->
+<!--        <id property = "tid" column = "tid"></id>-->
+<!--        <result property = "tname" column = "tname"></result>-->
+<!--        <result property = "tgender" column = "tgender"></result>-->
+<!--        <result property = "subject" column = "subject"></result>-->
+<!--        <collection property = "manyStudentList" javaType="list" ofType="domain.ManyStudent">-->
+<!--            <id property = "sid" column = "sid"></id>-->
+<!--            <result property = "sname" column ="sname"></result>-->
+<!--            <result property = "sgender" column = "sgender"></result>-->
+<!--        </collection>-->
+<!--    </resultMap>-->
+
+<!--    <select id = "selectOne" resultMap = "ManyTeacherForManyStudent">-->
+<!--        select t.*, s.* from manyteacher t inner join teacherandstudent ts on t.tid = ts.tid inner join manystudent s on ts.sid = s.sid where t.tid = #{tid};-->
+<!--    </select>-->
+
+<!--    第二种方式-->
+    <resultMap id = "teacherForStudent" type = "domain.ManyTeacher">
+        <id property = "tid" column = "tid"></id>
+        <result property = "tname" column = "tname"></result>
+        <result property = "tgender" column = "tgender"></result>
+        <result property = "subject" column = "subject"></result>
+        <collection property = "manyStudentList" column = "tid" javaType = "list" ofType = "domain.ManyStudent" select = "selectManyStudent"></collection>
+    </resultMap>
+
+    <select id = "selectManyStudent" resultType = "domain.ManyStudent">
+        select * from manystudent s inner join teacherandstudent ts on s.sid = ts.sid where ts.tid = #{tid}
+    </select>
+
+    <select id = "selectOneManyTeacherTwo" resultMap = "teacherForStudent">
+        select * from manyteacher where tid = #{tid}
+    </select>
+
+</mapper>

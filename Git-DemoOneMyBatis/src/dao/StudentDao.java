@@ -21,7 +21,7 @@ public interface StudentDao {
             }
     )
     @Select("select tid, tname, tage, subject from teacher where tid = #{tid}")
-    public Teacher selectTeacherOne(@Param("tid") Integer tid);
+    public Teacher selectOneTeacher(@Param("tid") Integer tid);
 
     @Select("select sid, sname, sage, gender, tid from student where tid = #{tid}")
     public Student teacherForStudent(@Param("tid") Integer tid);

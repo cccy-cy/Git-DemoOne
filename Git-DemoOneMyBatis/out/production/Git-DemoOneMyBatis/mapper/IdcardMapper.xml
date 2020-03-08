@@ -16,7 +16,7 @@
         select pid, name, gender, age from person where pid = #{pid}
     </select>
 
-    <select id="selectOne" resultMap="IdcardForPerson">
+    <select id="selectOneIdcard" resultMap="IdcardForPerson">
         select cid, number, city, pid from idcard where cid = #{cid}
     </select>
 </mapper>
